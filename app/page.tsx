@@ -12,15 +12,19 @@ export default function Home() {
   const [teamSize, setTeamSize] = useState(1)
   const [useCase, setUseCase] = useState('coding')
   const [auditResult, setAuditResult] = useState<AuditSummary | null>(null)
+  const [auditId, setAuditId] = useState<string | null>(null)
 
-  // Save form state to localStorage so it persists on reload
   useEffect(() => {
     const saved = localStorage.getItem('spendform')
     if (saved) {
-      const parsed = JSON.parse(saved)
-      setTools(parsed.tools)
-      setTeamSize(parsed.teamSize)
-      setUseCase(parsed.useCase)
+      try {
+        const parsed = JSON.parse(saved)
+        setTools(parsed.tools)
+        setTeamSize(parsed.teamSize)
+        setUseCase(parsed.useCase)
+      } catch (e) {
+        console.error('Failed to load saved form', e)
+      }
     }
   }, [])
 
@@ -28,8 +32,31 @@ export default function Home() {
     localStorage.setItem('spendform', JSON.stringify({ tools, teamSize, useCase }))
   }, [tools, teamSize, useCase])
 
-  function handleAudit() {
+  async function handleAudit() {
     const result = runAudit(tools, teamSize, useCase)
+
+    try {
+      const res = await fetch('/api/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tools,
+          teamSize,
+          useCase,
+          results: result.results,
+          totalMonthlySavings: result.totalMonthlySavings,
+          totalAnnualSavings: result.totalAnnualSavings
+        })
+      })
+      const data = await res.json()
+      if (data.id) {
+        setAuditId(data.id)
+        window.history.pushState({}, '', `/audit/${data.id}`)
+      }
+    } catch (err) {
+      console.error('Failed to save audit', err)
+    }
+
     setAuditResult(result)
   }
 
@@ -47,17 +74,21 @@ export default function Home() {
     setTools(updated)
   }
 
+  function handleReset() {
+    setAuditResult(null)
+    setAuditId(null)
+    window.history.pushState({}, '', '/')
+  }
+
   return (
     <main className="min-h-screen bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 py-12">
-
-        {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">
             AI Spend Audit
           </h1>
           <p className="text-lg text-gray-500">
-            Find out if you're overpaying for AI tools — free, instant, no login required.
+            Find out if you are overpaying for AI tools — free, instant, no login required.
           </p>
         </div>
 
@@ -76,7 +107,8 @@ export default function Home() {
         ) : (
           <AuditResults
             result={auditResult}
-            onReset={() => setAuditResult(null)}
+            auditId={auditId}
+            onReset={handleReset}
           />
         )}
       </div>
