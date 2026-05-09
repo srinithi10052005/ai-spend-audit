@@ -1,15 +1,51 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { AuditSummary } from '@/lib/auditEngine'
+import LeadCapture from '@/components/LeadCapture'
 
 type Props = {
   result: AuditSummary
   auditId: string | null
+  tools: any[]
+  teamSize: number
+  useCase: string
   onReset: () => void
 }
 
-export default function AuditResults({ result, auditId, onReset }: Props) {
+export default function AuditResults({
+  result, auditId, tools, teamSize, useCase, onReset
+}: Props) {
   const { results, totalMonthlySavings, totalAnnualSavings } = result
+  const [summary, setSummary] = useState<string | null>(null)
+  const [loadingSummary, setLoadingSummary] = useState(true)
+
+  useEffect(() => {
+    async function fetchSummary() {
+      try {
+        const res = await fetch('/api/summary', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tools,
+            teamSize,
+            useCase,
+            totalMonthlySavings,
+            totalAnnualSavings,
+            results
+          })
+        })
+        const data = await res.json()
+        setSummary(data.summary)
+      } catch (err) {
+        setSummary('Your audit is complete. Review the recommendations above to start saving on your AI tool spend.')
+      } finally {
+        setLoadingSummary(false)
+      }
+    }
+
+    fetchSummary()
+  }, [])
 
   function copyLink() {
     if (!auditId) return
@@ -25,10 +61,10 @@ export default function AuditResults({ result, auditId, onReset }: Props) {
       <div className="bg-black text-white rounded-2xl p-8 text-center">
         <p className="text-sm text-gray-400 mb-2">Potential monthly savings</p>
         <p className="text-5xl font-bold mb-1">
-          ${totalMonthlySavings.toFixed(0)}
+          {'$' + totalMonthlySavings.toFixed(0)}
         </p>
         <p className="text-gray-400 text-sm">
-          ${totalAnnualSavings.toFixed(0)} per year
+          {'$' + totalAnnualSavings.toFixed(0) + ' per year'}
         </p>
 
         {totalMonthlySavings > 500 && (
@@ -41,6 +77,24 @@ export default function AuditResults({ result, auditId, onReset }: Props) {
               Book a free Credex consultation
             </button>
           </div>
+        )}
+      </div>
+
+      {/* AI Summary */}
+      <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6">
+        <p className="text-xs font-medium text-blue-500 uppercase tracking-wide mb-2">
+          AI-generated summary
+        </p>
+        {loadingSummary ? (
+          <div className="space-y-2">
+            <div className="h-4 bg-blue-100 rounded animate-pulse w-full" />
+            <div className="h-4 bg-blue-100 rounded animate-pulse w-5/6" />
+            <div className="h-4 bg-blue-100 rounded animate-pulse w-4/6" />
+          </div>
+        ) : (
+          <p className="text-gray-700 text-sm leading-relaxed">
+            {summary ?? 'Your audit is complete. Review the recommendations above to start saving.'}
+          </p>
         )}
       </div>
 
@@ -63,10 +117,12 @@ export default function AuditResults({ result, auditId, onReset }: Props) {
                 </p>
               </div>
               <div className="text-right ml-4">
-                <p className="text-sm text-gray-400">${r.currentSpend}/mo</p>
+                <p className="text-sm text-gray-400">
+                  {'$' + r.currentSpend + '/mo'}
+                </p>
                 {r.savings > 0 ? (
                   <p className="text-green-600 font-semibold">
-                    Save ${r.savings.toFixed(0)}/mo
+                    {'Save $' + r.savings.toFixed(0) + '/mo'}
                   </p>
                 ) : (
                   <p className="text-gray-400 text-sm">Optimal</p>
@@ -86,6 +142,12 @@ export default function AuditResults({ result, auditId, onReset }: Props) {
           </p>
         </div>
       )}
+
+      {/* Email lead capture — shown after value, never before */}
+      <LeadCapture
+        auditId={auditId}
+        totalMonthlySavings={totalMonthlySavings}
+      />
 
       {/* Share link */}
       {auditId && (

@@ -9,6 +9,7 @@ export default function Home() {
   const [tools, setTools] = useState<Tool[]>([
     { name: 'cursor', plan: 'pro', seats: 1, monthlySpend: 20 }
   ])
+
   const [teamSize, setTeamSize] = useState(1)
   const [useCase, setUseCase] = useState('coding')
   const [auditResult, setAuditResult] = useState<AuditSummary | null>(null)
@@ -16,9 +17,11 @@ export default function Home() {
 
   useEffect(() => {
     const saved = localStorage.getItem('spendform')
+
     if (saved) {
       try {
         const parsed = JSON.parse(saved)
+
         setTools(parsed.tools)
         setTeamSize(parsed.teamSize)
         setUseCase(parsed.useCase)
@@ -29,7 +32,14 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('spendform', JSON.stringify({ tools, teamSize, useCase }))
+    localStorage.setItem(
+      'spendform',
+      JSON.stringify({
+        tools,
+        teamSize,
+        useCase
+      })
+    )
   }, [tools, teamSize, useCase])
 
   async function handleAudit() {
@@ -38,7 +48,9 @@ export default function Home() {
     try {
       const res = await fetch('/api/audit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           tools,
           teamSize,
@@ -48,7 +60,9 @@ export default function Home() {
           totalAnnualSavings: result.totalAnnualSavings
         })
       })
+
       const data = await res.json()
+
       if (data.id) {
         setAuditId(data.id)
         window.history.pushState({}, '', `/audit/${data.id}`)
@@ -61,22 +75,40 @@ export default function Home() {
   }
 
   function addTool() {
-    setTools([...tools, { name: 'chatgpt', plan: 'plus', seats: 1, monthlySpend: 20 }])
+    setTools([
+      ...tools,
+      {
+        name: 'chatgpt',
+        plan: 'plus',
+        seats: 1,
+        monthlySpend: 20
+      }
+    ])
   }
 
   function removeTool(index: number) {
     setTools(tools.filter((_, i) => i !== index))
   }
 
-  function updateTool(index: number, field: keyof Tool, value: string | number) {
+  function updateTool(
+    index: number,
+    field: keyof Tool,
+    value: string | number
+  ) {
     const updated = [...tools]
-    updated[index] = { ...updated[index], [field]: value }
+
+    updated[index] = {
+      ...updated[index],
+      [field]: value
+    }
+
     setTools(updated)
   }
 
   function handleReset() {
     setAuditResult(null)
     setAuditId(null)
+
     window.history.pushState({}, '', '/')
   }
 
@@ -87,8 +119,10 @@ export default function Home() {
           <h1 className="text-4xl font-bold text-gray-900 mb-3">
             AI Spend Audit
           </h1>
+
           <p className="text-lg text-gray-500">
-            Find out if you are overpaying for AI tools — free, instant, no login required.
+            Find out if you are overpaying for AI tools — free, instant,
+            no login required.
           </p>
         </div>
 
@@ -108,6 +142,9 @@ export default function Home() {
           <AuditResults
             result={auditResult}
             auditId={auditId}
+            tools={tools}
+            teamSize={teamSize}
+            useCase={useCase}
             onReset={handleReset}
           />
         )}
