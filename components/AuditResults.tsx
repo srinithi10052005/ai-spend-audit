@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { AuditSummary } from '@/lib/auditEngine'
-import LeadCapture from '@/components/LeadCapture'
+import { AuditSummary } from '../lib/auditEngine'
+import LeadCapture from '../components/LeadCapture'
 
 type Props = {
   result: AuditSummary
