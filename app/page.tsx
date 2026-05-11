@@ -1,17 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import SpendForm from '@/components/SpendForm'
-import AuditResults from '@/components/AuditResults'
-import { runAudit, AuditSummary, Tool } from '@/lib/auditEngine'
+import SpendForm from '../components/SpendForm'
+import AuditResults from '../components/AuditResults'
+import { runAudit, AuditSummary, Tool } from '../lib/auditEngine'
 
 export default function Home() {
   const [tools, setTools] = useState<Tool[]>([
     { name: 'cursor', plan: 'pro', seats: 1, monthlySpend: 20 }
   ])
 
-  const [teamSize, setTeamSize] = useState(1)
-  const [useCase, setUseCase] = useState('coding')
+  const [teamSize, setTeamSize] = useState<number>(1)
+  const [useCase, setUseCase] = useState<string>('coding')
   const [auditResult, setAuditResult] = useState<AuditSummary | null>(null)
   const [auditId, setAuditId] = useState<string | null>(null)
 
@@ -93,7 +93,7 @@ export default function Home() {
   function updateTool(
     index: number,
     field: keyof Tool,
-    value: string | number
+    value: Tool[keyof Tool]
   ) {
     const updated = [...tools]
 

@@ -1,4 +1,4 @@
-import { runAudit, Tool } from '@/lib/auditEngine'
+import { runAudit, Tool } from '../lib/auditEngine'
 
 // Test 1 — Cursor Business with 2 seats should recommend downgrade to Pro
 test('Cursor Business with 2 seats recommends downgrade to Pro', () => {
@@ -56,7 +56,10 @@ test('Total monthly savings is sum of all tool savings', () => {
   ]
   const result = runAudit(tools, 2, 'coding')
 
-  const manualTotal = result.results.reduce((sum, r) => sum + r.savings, 0)
+  const manualTotal = result.results.reduce(
+  (sum: number, r: any) => sum + r.savings,
+  0
+)
   expect(result.totalMonthlySavings).toBe(manualTotal)
 })
 
