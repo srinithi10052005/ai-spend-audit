@@ -32,16 +32,14 @@ export function runAudit(tools: Tool[], teamSize: number, useCase: string): Audi
 function auditTool(tool: Tool, teamSize: number, useCase: string): AuditResult {
   const { name, plan, seats, monthlySpend } = tool
 
-  // Cursor
   if (name === 'cursor') {
     if (plan === 'business' && seats <= 2) {
-      const savings = monthlySpend - (seats * 20)
       return {
         tool: 'Cursor',
         currentSpend: monthlySpend,
         recommendedAction: 'Downgrade to Pro plan',
-        savings,
-        reason: `Business plan ($40/seat) is overkill for ${seats} users. Pro ($20/seat) covers all core features.`
+        savings: monthlySpend - (seats * 20),
+        reason: 'Business plan ($40/seat) is overkill for ' + seats + ' users. Pro ($20/seat) covers all core features.'
       }
     }
     if (plan === 'pro' && useCase === 'writing') {
@@ -55,58 +53,42 @@ function auditTool(tool: Tool, teamSize: number, useCase: string): AuditResult {
     }
   }
 
-  // GitHub Copilot
   if (name === 'github_copilot') {
     if (plan === 'business' && seats <= 3) {
-      const savings = monthlySpend - (seats * 10)
       return {
         tool: 'GitHub Copilot',
         currentSpend: monthlySpend,
         recommendedAction: 'Downgrade to Individual plan',
-        savings,
-        reason: `Business plan ($19/seat) adds admin features not needed for ${seats} users. Individual ($10/seat) is sufficient.`
-      }
-    }
-    if (useCase === 'coding' && seats >= 5) {
-      return {
-        tool: 'GitHub Copilot',
-        currentSpend: monthlySpend,
-        recommendedAction: 'Consider Cursor Pro as alternative',
-        savings: monthlySpend * 0.1,
-        reason: 'Cursor offers stronger autocomplete and chat for coding-heavy teams at similar cost.'
+        savings: monthlySpend - (seats * 10),
+        reason: 'Business plan ($19/seat) adds admin features not needed for ' + seats + ' users. Individual ($10/seat) is sufficient.'
       }
     }
   }
 
-  // Claude
   if (name === 'claude') {
     if (plan === 'team' && seats <= 2) {
-      const savings = monthlySpend - (seats * 20)
       return {
         tool: 'Claude',
         currentSpend: monthlySpend,
-        recommendedAction: 'Switch to Pro plan (individual)',
-        savings,
-        reason: `Team plan ($30/seat, 5-seat minimum) is wasteful for ${seats} users. Pro at $20/seat saves money.`
+        recommendedAction: 'Switch to Pro plan',
+        savings: monthlySpend - (seats * 20),
+        reason: 'Team plan ($30/seat, 5-seat minimum) is wasteful for ' + seats + ' users. Pro at $20/seat saves money.'
       }
     }
   }
 
-  // ChatGPT
   if (name === 'chatgpt') {
     if (plan === 'team' && seats <= 2) {
-      const savings = monthlySpend - (seats * 20)
       return {
         tool: 'ChatGPT',
         currentSpend: monthlySpend,
         recommendedAction: 'Switch to Plus plan',
-        savings,
-        reason: `Team plan ($30/seat) has a 2-seat minimum but adds features most small teams don't use.`
+        savings: monthlySpend - (seats * 20),
+        reason: 'Team plan ($30/seat) has a 2-seat minimum but adds features most small teams do not use.'
       }
     }
   }
 
-  // Already optimal
   return {
     tool: name,
     currentSpend: monthlySpend,

@@ -60,7 +60,7 @@ export default function LeadCapture({ auditId, totalMonthlySavings }: Props) {
         Free. No spam. Unsubscribe any time.
       </p>
 
-      {/* Honeypot field — hidden from real users, catches bots */}
+      {/* Honeypot — hidden from users, catches bots */}
       <input
         type="text"
         name="website"
