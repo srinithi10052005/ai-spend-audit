@@ -7,13 +7,21 @@ import { runAudit, AuditSummary, Tool } from '../lib/auditEngine'
 
 export default function Home() {
   const [tools, setTools] = useState<Tool[]>([
-    { name: 'cursor', plan: 'pro', seats: 1, monthlySpend: 20 }
+    {
+      name: 'cursor',
+      plan: 'pro',
+      seats: 1,
+      monthlySpend: 20
+    }
   ])
 
   const [teamSize, setTeamSize] = useState<number>(1)
   const [useCase, setUseCase] = useState<string>('coding')
-  const [auditResult, setAuditResult] = useState<AuditSummary | null>(null)
-  const [auditId, setAuditId] = useState<string | null>(null)
+  const [auditResult, setAuditResult] =
+    useState<AuditSummary | null>(null)
+
+  const [auditId, setAuditId] =
+    useState<string | null>(null)
 
   useEffect(() => {
     const saved = localStorage.getItem('spendform')
@@ -56,8 +64,10 @@ export default function Home() {
           teamSize,
           useCase,
           results: result.results,
-          totalMonthlySavings: result.totalMonthlySavings,
-          totalAnnualSavings: result.totalAnnualSavings
+          totalMonthlySavings:
+            result.totalMonthlySavings,
+          totalAnnualSavings:
+            result.totalAnnualSavings
         })
       })
 
@@ -65,7 +75,12 @@ export default function Home() {
 
       if (data.id) {
         setAuditId(data.id)
-        window.history.pushState({}, '', `/audit/${data.id}`)
+
+        window.history.pushState(
+          {},
+          '',
+          `/audit/${data.id}`
+        )
       }
     } catch (err) {
       console.error('Failed to save audit', err)
@@ -87,20 +102,27 @@ export default function Home() {
   }
 
   function removeTool(index: number) {
-    setTools(tools.filter((_, i) => i !== index))
+    setTools(
+      tools.filter((_, i) => i !== index)
+    )
   }
 
+  // FIXED: Simplified the 'value' type and added a type assertion
   function updateTool(
     index: number,
-    field: keyof Tool,
-    value: Tool[keyof Tool]
+    field: string | number | symbol,
+    value: string | number
   ) {
+    if (typeof field !== 'string') {
+      return
+    }
+
     const updated = [...tools]
 
     updated[index] = {
       ...updated[index],
       [field]: value
-    }
+    } as Tool // Assert as Tool to prevent partial object errors
 
     setTools(updated)
   }
@@ -121,8 +143,8 @@ export default function Home() {
           </h1>
 
           <p className="text-lg text-gray-500">
-            Find out if you are overpaying for AI tools — free, instant,
-            no login required.
+            Find out if you are overpaying for AI tools —
+            free, instant, no login required.
           </p>
         </div>
 
