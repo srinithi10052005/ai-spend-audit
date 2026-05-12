@@ -10,10 +10,17 @@ Built as a lead generation tool for [Credex](https://credex.rocks) — a platfor
 
 ## Screenshots
 
-> Add 3 screenshots here — paste images of:
-> 1. The input form
-> 2. The results page showing savings
-> 3. The email capture form
+<img width="1176" height="709" alt="image" src="https://github.com/user-attachments/assets/e6468ed3-b761-40da-a5d1-e4e9b872927c" />
+
+<img width="1010" height="726" alt="image" src="https://github.com/user-attachments/assets/3ee92a20-0bcc-44e5-af48-0e8b80f97503" />
+
+<img width="1084" height="836" alt="image" src="https://github.com/user-attachments/assets/c2bd25a5-3dab-4a4c-bb07-97ecd299cebc" />
+
+<img width="994" height="504" alt="image" src="https://github.com/user-attachments/assets/cc25e11c-5c4d-416a-bc01-fdfa9fd2d34b" />
+
+<img width="963" height="289" alt="image" src="https://github.com/user-attachments/assets/a4dc7431-82c1-46a3-a352-f1a655678882" />
+
+
 
 ---
 
