@@ -57,7 +57,7 @@ export default function SpendForm({
             min={1}
             value={teamSize}
             onChange={e => onTeamSizeChange(Number(e.target.value))}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-black"
           />
         </div>
         <div>
@@ -67,10 +67,12 @@ export default function SpendForm({
           <select
             value={useCase}
             onChange={e => onUseCaseChange(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-black"
           >
             {USE_CASES.map(u => (
-              <option key={u} value={u}>{u.charAt(0).toUpperCase() + u.slice(1)}</option>
+              <option key={u} value={u}>
+                {u.charAt(0).toUpperCase() + u.slice(1)}
+              </option>
             ))}
           </select>
         </div>
@@ -87,7 +89,7 @@ export default function SpendForm({
               <select
                 value={tool.name}
                 onChange={e => onUpdateTool(i, 'name', e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white"
+                className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-black"
               >
                 {TOOLS.map(t => (
                   <option key={t.value} value={t.value}>{t.label}</option>
@@ -100,10 +102,12 @@ export default function SpendForm({
               <select
                 value={tool.plan}
                 onChange={e => onUpdateTool(i, 'plan', e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white"
+                className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-black"
               >
                 {(PLANS[tool.name] || ['pro']).map(p => (
-                  <option key={p} value={p}>{p.charAt(0).toUpperCase() + p.slice(1)}</option>
+                  <option key={p} value={p}>
+                    {p.charAt(0).toUpperCase() + p.slice(1)}
+                  </option>
                 ))}
               </select>
             </div>
@@ -116,7 +120,7 @@ export default function SpendForm({
                 value={tool.seats}
                 onChange={e => onUpdateTool(i, 'seats', Number(e.target.value))}
                 placeholder="Seats"
-                className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-black"
               />
             </div>
 
@@ -128,7 +132,7 @@ export default function SpendForm({
                 value={tool.monthlySpend}
                 onChange={e => onUpdateTool(i, 'monthlySpend', Number(e.target.value))}
                 placeholder="$/mo"
-                className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-black"
               />
             </div>
 
@@ -138,7 +142,7 @@ export default function SpendForm({
                 onClick={() => onRemoveTool(i)}
                 className="text-gray-400 hover:text-red-500 text-lg font-bold"
               >
-                ×
+                x
               </button>
             </div>
           </div>
@@ -148,7 +152,7 @@ export default function SpendForm({
       {/* Add tool button */}
       <button
         onClick={onAddTool}
-        className="w-full border-2 border-dashed border-gray-300 rounded-lg py-3 text-sm text-gray-500 hover:border-gray-400 hover:text-gray-600 mb-8"
+        className="w-full border-2 border-dashed border-gray-300 rounded-lg py-3 text-sm text-gray-600 hover:border-gray-400 hover:text-gray-700 mb-8"
       >
         + Add another tool
       </button>
