@@ -70,27 +70,27 @@ export default function LeadCapture({ auditId, totalMonthlySavings }: Props) {
       />
 
       <div className="space-y-3">
-        <input
-          type="email"
-          placeholder="your@email.com"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
-        />
-        <input
-          type="text"
-          placeholder="Company name (optional)"
-          value={companyName}
-          onChange={e => setCompanyName(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
-        />
-        <input
-          type="text"
-          placeholder="Your role (optional)"
-          value={role}
-          onChange={e => setRole(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
-        />
+       <input
+  type="email"
+  placeholder="your@email.com"
+  value={email}
+  onChange={e => setEmail(e.target.value)}
+  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-black"
+/>
+<input
+  type="text"
+  placeholder="Company name (optional)"
+  value={companyName}
+  onChange={e => setCompanyName(e.target.value)}
+  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-black"
+/>
+<input
+  type="text"
+  placeholder="Your role (optional)"
+  value={role}
+  onChange={e => setRole(e.target.value)}
+  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-black"
+/>
         <button
           onClick={handleSubmit}
           disabled={loading}
