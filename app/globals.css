@@ -22,11 +22,36 @@ body {
   color: var(--foreground);
 }
 
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
   font-family: 'Inter', sans-serif;
 }
 
+input {
+  color: #111827 !important;
+  background-color: #ffffff !important;
+}
+
+select {
+  color: #111827 !important;
+  background-color: #ffffff !important;
+}
+
 ::placeholder {
-  font-family: 'Inter', sans-serif;
-  color: #9ca3af;
+  color: #9ca3af !important;
+  opacity: 1;
+}
+
+input:not(:placeholder-shown) {
+  color: #111827 !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #111827 !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
 }
