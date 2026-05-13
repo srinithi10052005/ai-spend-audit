@@ -6,17 +6,17 @@ Every number in the audit engine traces to an official vendor pricing page.
 ---
 
 ## Cursor
-- Hobby: $0/month — https://cursor.com/pricing — verified 2026-05-12
-- Pro: $20/user/month — https://cursor.com/pricing — verified 2026-05-12
-- Business: $40/user/month — https://cursor.com/pricing — verified 2026-05-12
-- Enterprise: Custom pricing — https://cursor.com/pricing — verified 2026-05-12
+- Hobby: $0/month — https://cursor.com/pricing — verified 2026-05-10
+- Pro: $20/user/month — https://cursor.com/pricing — verified 2026-05-10
+- Business: $40/user/month — https://cursor.com/pricing — verified 2026-05-10
+- Enterprise: Custom pricing — https://cursor.com/pricing — verified 2026-05-10
 
 ---
 
 ## GitHub Copilot
-- Individual: $10/user/month — https://github.com/features/copilot#pricing — verified 2026-05-12
-- Business: $19/user/month — https://github.com/features/copilot#pricing — verified 2026-05-12
-- Enterprise: $39/user/month — https://github.com/features/copilot#pricing — verified 2026-05-12
+- Individual: $10/user/month — https://github.com/features/copilot#pricing — verified 2026-05-11
+- Business: $19/user/month — https://github.com/features/copilot#pricing — verified 2026-05-11
+- Enterprise: $39/user/month — https://github.com/features/copilot#pricing — verified 2026-05-11
 
 ---
 
@@ -30,38 +30,37 @@ Every number in the audit engine traces to an official vendor pricing page.
 ---
 
 ## ChatGPT (OpenAI)
-- Plus: $20/user/month — https://openai.com/chatgpt/pricing — verified 2026-05-12
-- Team: $30/user/month (minimum 2 seats) — https://openai.com/chatgpt/pricing — verified 2026-05-12
-- Enterprise: Custom pricing — https://openai.com/chatgpt/pricing — verified 2026-05-12
+- Plus: $20/user/month — https://openai.com/chatgpt/pricing — verified 2026-05-13
+- Team: $30/user/month (minimum 2 seats) — https://openai.com/chatgpt/pricing — verified 2026-05-13
+- Enterprise: Custom pricing — https://openai.com/chatgpt/pricing — verified 2026-05-13
 
 ---
 
 ## Anthropic API (Direct)
 - Pay as you go — no monthly fee
-- Claude Sonnet 4: $3/million input tokens, $15/million output tokens — https://www.anthropic.com/pricing — verified 2026-05-12
-- Claude Haiku: $0.80/million input tokens, $4/million output tokens — https://www.anthropic.com/pricing — verified 2026-05-12
+- Claude Sonnet 4: $3/million input tokens, $15/million output tokens — https://www.anthropic.com/pricing — verified 2026-05-07
+- Claude Haiku: $0.80/million input tokens, $4/million output tokens — https://www.anthropic.com/pricing — verified 2026-05-07
 
 ---
 
 ## OpenAI API (Direct)
 - Pay as you go — no monthly fee
-- GPT-4o: $2.50/million input tokens, $10/million output tokens — https://openai.com/api/pricing — verified 2026-05-12
-- GPT-4o mini: $0.15/million input tokens, $0.60/million output tokens — https://openai.com/api/pricing — verified 2026-05-12
+- GPT-4o: $2.50/million input tokens, $10/million output tokens — https://openai.com/api/pricing — verified 2026-05-07
+- GPT-4o mini: $0.15/million input tokens, $0.60/million output tokens — https://openai.com/api/pricing — verified 2026-05-07
 
 ---
 
 ## Gemini (Google)
-- Gemini Pro: $20/user/month — https://one.google.com/about/plans — verified 2026-05-12
-- Gemini Ultra: $30/user/month — https://one.google.com/about/plans — verified 2026-05-12
-- Gemini 1.5 Flash API: Free tier available, $0.075/million input tokens paid — https://ai.google.dev/pricing — verified 2026-05-12
+- Gemini Pro: $20/user/month — https://one.google.com/about/plans — verified 2026-05-08
+- Gemini Ultra: $30/user/month — https://one.google.com/about/plans — verified 2026-05-08
+- Gemini 1.5 Flash API: Free tier available, $0.075/million input tokens paid — https://ai.google.dev/pricing — verified 2026-05-08
 
 ---
 
 ## Windsurf (Codeium)
-- Free: $0/month — https://windsurf.com/pricing — verified 2026-05-12
-- Pro: $15/user/month — https://windsurf.com/pricing — verified 2026-05-12
-- Teams: $35/user/month — https://windsurf.com/pricing — verified 2026-05-12
-
+- Free: $0/month — https://windsurf.com/pricing — verified 2026-05-09
+- Pro: $15/user/month — https://windsurf.com/pricing — verified 2026-05-09
+- Teams: $35/user/month — https://windsurf.com/pricing — verified 2026-05-09
 ---
 
 ## Audit Engine Price Justifications
